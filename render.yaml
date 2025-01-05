@@ -1,0 +1,51 @@
+services:
+  # Web Service
+  - type: web
+    name: college-management-api
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:prod
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: DB_HOST
+        fromDatabase:
+          name: college-management-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: college-management-db
+          property: port
+      - key: DB_USERNAME
+        fromDatabase:
+          name: college-management-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: college-management-db
+          property: password
+      - key: DB_NAME
+        fromDatabase:
+          name: college-management-db
+          property: database
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRATION
+        value: 1d
+
+  # Database
+databases:
+  - name: college-management-db
+    plan: free
+    ipAllowList: []
+
+# Build and deploy hooks
+hooks:
+  - name: Run Migrations
+    command: npm run migration:run
+    runOnDeploy: true
+  - name: Seed Database
+    command: npm run seed:prod
+    runOnDeploy: true

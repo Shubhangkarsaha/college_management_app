@@ -1,0 +1,206 @@
+{
+  "info": {
+    "_postman_id": "1234567-89ab-cdef-0123-456789abcdef",
+    "name": "College Management API",
+    "description": "API collection for College Management System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"testuser\",\n    \"email\": \"test@example.com\",\n    \"password\": \"Test123!@#\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "register"]
+            },
+            "description": "Register a new user"
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"test@example.com\",\n    \"password\": \"Test123!@#\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            },
+            "description": "Login and get JWT token"
+          }
+        }
+      ]
+    },
+    {
+      "name": "College Placements",
+      "item": [
+        {
+          "name": "Get College Placement Data",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/college_data/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["college_data", "1"]
+            },
+            "description": "Get placement data with trends for a specific college"
+          }
+        }
+      ]
+    },
+    {
+      "name": "College Courses",
+      "item": [
+        {
+          "name": "Get College Courses",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/college_courses/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["college_courses", "1"]
+            },
+            "description": "Get courses for a specific college sorted by fee"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Colleges",
+      "item": [
+        {
+          "name": "Get Colleges (No Filter)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/colleges",
+              "host": ["{{baseUrl}}"],
+              "path": ["colleges"]
+            },
+            "description": "Get all colleges sorted by score"
+          }
+        },
+        {
+          "name": "Get Colleges by City",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/colleges?city=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["colleges"],
+              "query": [
+                {
+                  "key": "city",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Get colleges filtered by city"
+          }
+        },
+        {
+          "name": "Get Colleges by State",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/colleges?state=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["colleges"],
+              "query": [
+                {
+                  "key": "state",
+                  "value": "1"
+                }
+              ]
+            },
+            "description": "Get colleges filtered by state"
+          }
+        },
+        {
+          "name": "Get College by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/colleges/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["colleges", "1"]
+            },
+            "description": "Get specific college details"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "jwt_token",
+      "value": "your_jwt_token_here",
+      "type": "string"
+    }
+  ]
+}
