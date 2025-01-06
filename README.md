@@ -181,7 +181,3 @@ curl -X GET http://localhost:3000/college_courses/1 \
 curl -X GET "http://localhost:3000/colleges?city=1" \
   -H "Authorization: Bearer <your-token>"
 ```
-
-## License
-
-This project is licensed under the MIT License.
